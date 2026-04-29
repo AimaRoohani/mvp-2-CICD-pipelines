@@ -1,4 +1,4 @@
-name: mvp-3 CICD pipelines
+name: mvp-3.5 CICD + Security Pipelines
 
 on:
  push:
@@ -17,3 +17,11 @@ jobs:
 
   - name: Build Docker image
     run: docker build -t mvp-3 .
+
+  - name: Run Trivy security scan
+    run: |
+      sudo apt-get update
+      sudo apt-get install wget -y
+      wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.48.0_Linux-64bit.deb
+      sudo dpkg -i trivy_0.48.0_Linux-64bit.deb
+      trivy image mvp-3
