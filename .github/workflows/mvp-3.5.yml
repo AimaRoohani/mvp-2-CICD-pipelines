@@ -1,4 +1,4 @@
-name: mvp-3.5 Security Scan
+name: MVP-3.5 Security Scan
 
 on:
   push:
