@@ -1,11 +1,11 @@
-name: mvp-3.5 CI pipeline
+name: mvp-3.5 Security Scan
 
 on:
   push:
     branches: ["main"]
 
 jobs:
-  build:
+  security-scan:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,3 +14,10 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t mvp-2 .
+
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: mvp-2
+          format: table
+          exit-code: 0
